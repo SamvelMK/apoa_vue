@@ -8,40 +8,54 @@
                   <tbody>
                     <tr>
                       <td style="text-align: left;">{{questions[step][0]}}</td>
-                      <td>
-                        <input class="form-check-input" type="radio"
-                          :name="step" :id="step" value=1 v-model="selected">
-                        <label class="form-check-label" :for="step"> 3 </label>
-
-                        <input class="form-check-input" type="radio"
-                          :name="step" :id="step" value=2 v-model="selected">
-                        <label class="form-check-label" :for="step"> 2 </label>
-
-                        <input class="form-check-input" type="radio"
-                          :name="step" :id="step" value=3 v-model="selected">
-                        <label class="form-check-label" :for="step"> 1 </label>
-
-                        <input class="form-check-input" type="radio"
-                          :name="step" :id="step" value=4 v-model="selected">
-                        <label class="form-check-label" :for="step"> 0 </label>
-
-                        <input class="form-check-input" type="radio"
-                          :name="step" :id="step" value=5 v-model="selected">
-                        <label class="form-check-label" :for="step"> 1 </label>
-
-                        <input class="form-check-input" type="radio"
-                          :name="step" :id="step" value=6 v-model="selected">
-                        <label class="form-check-label" :for="step"> 2 </label>
-
-                        <input class="form-check-input" type="radio"
-                          :name="step" :id="step" value=7 v-model="selected">
-                        <label class="form-check-label" :for="step"> 3 </label>
+                      <td id="questions">
+                        <div class="checkboxgroup">
+                            <input class="form-check-input" type="radio"
+                            :name="step" :id="step" value=1 v-model="selected">
+                            <label class="form-check-label" :for="step"> 3 </label>
+                        </div>
+                        <div class="checkboxgroup">
+                            <input class="form-check-input" type="radio"
+                            :name="step" :id="step" value=2 v-model="selected">
+                            <label class="form-check-label" :for="step"> 2 </label> 
+                        </div>
+                        <div class="checkboxgroup">
+                            <input class="form-check-input" type="radio"
+                            :name="step" :id="step" value=3 v-model="selected">
+                            <label class="form-check-label" :for="step"> 1 </label>
+                        </div>
+                        <div class="checkboxgroup">
+                            <input class="form-check-input" type="radio"
+                            :name="step" :id="step" value=4 v-model="selected">
+                            <label class="form-check-label" :for="step"> 0 </label>    
+                        </div>
+                        <div class="checkboxgroup">
+                            <input class="form-check-input" type="radio"
+                            :name="step" :id="step" value=5 v-model="selected">
+                            <label class="form-check-label" :for="step"> 1 </label>
+                        </div>
+                        <div class="checkboxgroup">
+                            <input class="form-check-input" type="radio"
+                            :name="step" :id="step" value=6 v-model="selected">
+                            <label class="form-check-label" :for="step"> 2 </label>
+                        </div>
+                        <div class="checkboxgroup">
+                            <input class="form-check-input" type="radio"
+                            :name="step" :id="step" value=7 v-model="selected">
+                            <label class="form-check-label" :for="step"> 3 </label>
+                        </div>
                       </td>
                       <td style="text-align: left;">{{questions[step][0]}}</td>
                     </tr>
                   </tbody>
                 </table>
-            <button class="btn btn-primary mb-2" @click="next">Next</button>
+                <div class="button">
+                    <button id="previous" class="btn btn-primary mb-2" @click="prior"> Նախորդը </button>
+                    <button id="next" class="btn btn-primary mb-2" @click="next"> Հաջորդը </button>
+                </div>
+        </div>
+        <div id="warning" v-if="showWarning" class="alert alert-danger" role="alert">
+                    Համոզված ե՞ք որ չեք ցանկանում պատասխանել տվյալ հարցին:
         </div>
     </div>
 </template>
@@ -99,13 +113,24 @@ export default {
             step: 1,
             selected: null,
             answers:[{}],
+            showWarning: false,
         }
     },
     methods: {
         next() {
-            this.step++;
-            this.answers.push(this.selected);
-            this.selected = null;
+            if (this.selected) {
+                this.step++;
+                this.answers.push(this.selected);
+                this.selected = null;
+            } else {
+                this.showWarning = true;
+            }
+            
+        },
+        prior() {
+            if (this.step > 1) {
+                this.step--;
+            }
         }
     },
 }
@@ -124,7 +149,11 @@ p{
 
 td{
     width: 12rem;
-    padding:1rem;
+    padding: 1rem;
+}
+
+#questions{
+    padding-left: 3rem;
 }
 
 input{
@@ -136,14 +165,22 @@ input{
     cursor:pointer;
 }
 
-label{
-    margin:0;
-    padding: 0;
+.checkboxgroup {
+  display: inline-block;
+  text-align: center;
+  padding-left: 0.1rem;
+}
+.checkboxgroup label {
+  display: block;
 }
 
-button{
-    margin-left: 90%;
-    margin-right: 5%
+#previous{
+    margin-left: 1rem;
+    margin-right: 75%;
+}
+
+#warning{
+    padding: -12rem;
 }
 
 </style>
