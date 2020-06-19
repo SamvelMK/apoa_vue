@@ -1,16 +1,18 @@
 <template>
     <div>
         <div class="container">
-            <pil></Pil>
+            <router-view></router-view>
         </div>
     </div>
 </template>
 
 <script>
-import Pil from "@/components/Pil.vue"
+
 export default {
-    components: {
-        Pil,
+    computed: {
+        step() {
+            return this.$store.state.steps; 
+        }
     },
 }
 </script>
@@ -20,5 +22,4 @@ export default {
 .container{
     margin-top: 3%;
 }
-
 </style>

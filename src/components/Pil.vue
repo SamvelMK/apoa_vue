@@ -53,25 +53,35 @@
                     <div class="button">
                         <button id="previous" class="btn btn-primary mb-2"  @click="prior"> Նախորդը </button>
                         <button id="next" v-if="step < 19" class="btn btn-primary mb-2" @click="next"> Հաջորդը </button>
-                        <button id="next" v-else class="btn btn-primary mb-2" @click="submitPil"> Անցնել հաջորդ հարցարանին: </button>
+                        <router-link v-else to="/maslach"> 
+                            <button id="next" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին: </button>
+                        </router-link>  
 
                     </div>
             </div>
         </div>
         <div id="warning" v-if="showWarning" class="alert alert-danger" role="alert">
-                    Համոզված ե՞ք որ չեք ցանկանում պատասխանել տվյալ հարցին:
-                <div class="button">
-                    <button id="previous" class="btn btn-primary mb-2"  @click="skipQuestion"> Այո </button>
-                    <button id="next" class="btn btn-primary mb-2" @click="showWarning=!showWarning"> Ոչ </button>
-                </div>
+            <div id='warning-message' class="container">
+                <h5 style="padding: 3%">
+                &emsp; &emsp; Ձեր մասնակցությւունը մեզ համար շատ կարևոր է: <br> <br> &emsp; &emsp; Ցանկանում ենք մեկ անգամ
+                ևս ձեզ հիշեցնել,
+                որ Ձեր անկեղծ պատասխանները կօգնեն այս հետազոտության իրականացնմանը, որը թույլ կտա ավելի լավ հասկանալ
+                Հայասատանում ուռուցքաբանների շրջանում հուզական այրումը պայմանավորող գործոնները և մշակել կանխարգելման
+                հնարավոր եղանակաները: <br> <br>
+                &emsp; &emsp; Վստահ եք որ ցանկանում եք դադարեցնել:
+                </h5>
+                <a class="btn btn-primary btn-lg" role="button" @click="skipQuestion" style="color: white; margin-right: 80%;">
+                <span class="glyphicon glyphicon-chevron-left"></span> Այո՛ </a>
+                <a class="btn btn-primary btn-lg" role="button"  @click="showWarning=!showWarning" style="color: white;">
+                <span class="glyphicon glyphicon-chevron-right"></span> Ո՛չ </a>
+            </div>
         </div>
-       Answers {{ pil }}
     </div>
 </template>
 
 
 <script>
-// import { mapGetters } from 'vuex';
+
 export default {
     data() {
         return {
@@ -138,12 +148,12 @@ export default {
             }
         },
         skipQuestion(){
-            this.pil[this.step] = null;
+            this.pil[this.step] = 'NA';
             this.step++;
             this.showWarning = false;
         },
         submitPil(){
-            return this.$http.post('', this.$store.state.pil)
+            this.$store.state.steps ++;
         }
     },
     computed: {
@@ -203,11 +213,23 @@ input{
 }
 
 #warning{
-    /* margin: -10rem; */
-    margin-top: -10rem;
-    margin-left: 15rem;
-    height: 10rem;
-    width: 30rem;
+    margin-top: -20rem;
+    background-color:white; 
+    height:70%;
+    opacity: 0.8;
+    position: absolute;
+    border-color: white;
+}
+
+#warning-message{
+    background-color: indianred;
+    opacity: 1;
+    margin: 15%;
+    width: 75%;
+}
+
+h5{
+    color:black;
 }
 
 </style>

@@ -5,33 +5,45 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        demographics:[],
-        pil: [],
-        maslach:[],
-        eri:[],
+        steps: 0,
+        data: {
+            demographics:[],
+            pil: [],
+            maslach:[],
+            eri:[],
+        },
     },
     getters: {
         demographics: state => {
-            state.demographics
+            state.data.demographics
         },
         pil: state => {
-            return state.pil
+            return state.data.pil
         },
         maslach: state =>{
-            state.demographics
+            state.data.demographics
         },
         eri: state=>{
-            state.eri
+            state.data.eri
+        },
+        steps: state =>{
+            state.steps
         }
     },
     mutations: {
         updatePil: (state, payload)=>{
-            state.pil.push(payload);
+            state.data.pil.push(payload);
         },
+        stepIncrease: (state)=>{
+            state.steps ++;
+        }
     },
     actions: {
         updatePil({commit}, payload){
             commit('updatePil', payload);
+        },
+        stepIncrease({commit}){
+            commit('stepIncrease');
         }
     }
 })
