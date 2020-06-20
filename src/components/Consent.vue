@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <h1 class="tit"> Իրազեկ Համաձայնության Ձև</h1>
+            <h1 class="title"> Իրազեկ Համաձայնության Ձև</h1>
             <p> 
             Բարև Ձեզ: <br> <br>
             Մենք հրավիրում ենք Ձեզ մասնակցելու սույն հետազոտությանը, որի նպատակն է` ուսումնասիրել Հայասատանում ուռուցքաբանների 
@@ -25,7 +25,7 @@
                     <router-link to="/refuse"> <a>Ոչ</a></router-link>
                 </button> 
                 <button id="yes" class="btn btn-primary mb-2">
-                    <router-link to="/pil"> <a> Այո </a></router-link>
+                    <router-link to="/demographics"> <a> Այո </a></router-link>
                 </button> 
                 
             <div id="buttons">
