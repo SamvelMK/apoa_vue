@@ -1,6 +1,13 @@
 <template>
     <div>
-        <div class="container">
+        <div v-if="startTest" class="card" id="start-test" >
+                <h1 type="subtitle"> Հարցարան 2 </h1>
+                <p> {{instructions}} </p>
+                 <div class="button">
+                        <button id="startTest" class="btn btn-primary mb-2"  @click="startTest = !startTest"> Սկսել հարցարանը: </button>
+                 </div>
+            </div>
+        <div v-else class="container" :class="{background:showWarning}">
             <div class="container">
                 <h4>{{ instructions }}</h4>
             </div>
@@ -53,8 +60,8 @@
                     <div class="button">
                         <button id="previous" class="btn btn-primary mb-2"  @click="prior"> Նախորդը </button>
                         <button id="next" v-if="step < 19" class="btn btn-primary mb-2" @click="next"> Հաջորդը </button>
-                        <router-link v-else to="/maslach"> 
-                            <button id="next" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին: </button>
+                        <router-link v-else to="/eri"> 
+                            <button id="next-questionaire" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին: </button>
                         </router-link>  
 
                     </div>
@@ -129,6 +136,7 @@ export default {
                             `Իմ առօրյա գործերը ինձ միայն տհաճություններ և անհանգստություններ են պատճառում։ `]},
             step: 0,
             showWarning: false,
+            startTest: true,
         }
     },
     methods: {
@@ -202,7 +210,23 @@ input{
 
 #previous{
     margin-left: 1rem;
-    margin-right: 73%;
+    margin-right: 63%;
+}
+
+#next{
+    margin-left: 15%;
+}
+
+#next-questionnaire{
+    margin-left: 62%;
+}
+
+.background{
+    opacity:    0.5; 
+    background: white; 
+    width:      100%;
+    height:     100%; 
+    position:   relative;
 }
 
 #warning{
@@ -215,14 +239,31 @@ input{
 }
 
 #warning-message{
-    background-color: indianred;
-    opacity: 1;
+    background-color: pink;
+    color:black;
     margin: 15%;
     width: 75%;
 }
 
 h5{
     color:black;
+}
+h5{
+    color:black;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#start-test{
+    padding: 1.5rem;
+    text-align:justify;
+}
+
+#startTest{
+    margin-left: 80%;
 }
 
 </style>

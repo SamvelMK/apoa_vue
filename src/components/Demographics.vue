@@ -1,263 +1,259 @@
 <template>
     <div>
-        <div class="container">
-            <div class="card"> 
-                <h1 class="display-4"> Սոցիալ դեմոգրաֆիկ տվյալներ: </h1>
+        <div class="container" id="background" >
+            <div class="card" :class="{background:showWarning}">
+                <section v-if="steps==0">
                     <div class="container">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="age"> Խնդրում ենք նշել Ձեր տարիքը՝ </label>
-                            <input v-model="age" type="number" class="form-control" id="age">
+                            <div class="form-group row">
+                                <div class="col-xs-2">
+                                <label for="age"> {{ sections[steps].age }} </label>
+                                <input v-model="answers.age" type="number" class="form-control" id="age">
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="container">
+                            <p> {{ sections[steps].sex }} <p>
+                            <div class="form-check">
+                                <input v-model="answers.sex" class="form-check-input" type="radio" name="sex" id="female"
+                                value=1>
+                                <label class="form-check-label" for="female"> Իգ </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="answers.sex" class="form-check-input" type="radio" name="sex" id="male" value=2>
+                                <label class="form-check-label" for="male"> Ար </label>
+                            </div>
+                        </div>
+                        <div class="container" >
+                            <p> {{ sections[steps].maritalStatus }} <p>
+                            <div class="form-check">
+                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio" name="maritalstatus" id="single" value=1>
+                                <label class="form-check-label" for="single"> Ամուրի </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio" name="maritalstatus" id="married" value=2>
+                                <label class="form-check-label" for="married"> Ամուսնացած </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio"
+                                name="maritalstatus" id="married-with-kids" value=3>
+                                <label class="form-check-label" for="married-with-kids"> Ամուսնացած եմ և ունեմ երեխաներ </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio"
+                                name="maritalstatus" id="single-parent" value=4>
+                                <label class="form-check-label" for="single-parent"> Միայնակ ծնող </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio"
+                                name="maritalstatus" id="widowed" value=5>
+                                <label class="form-check-label" for="widowed"> Այրի </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio"
+                                name="maritalstatus" id="other" value=6>
+                                <label class="form-check-label" for="other"> Այլ </label>
+                            </div>
+                        </div>
+                </section> 
+                    
+                <section v-if="steps==1">
                     <div class="container">
-                        <p>Խնդրում ենք նշել Ձեր սեռը՝</p>
-                        <div class="form-check">
-                            <input v-model="sex" class="form-check-input" type="radio" name="sex" id="female"
-                            value=1>
-                            <label class="form-check-label" for="female"> Իգ </label>
-                        </div>
-                        <div class="form-check">
-                            <input v-model="sex" class="form-check-input" type="radio" name="sex" id="male" value=2>
-                            <label class="form-check-label" for="male"> Ար </label>
-                        </div>
-                    </div>
-
-                    <div class="container" >
-                        <p> Խնդրում ենք նշել Ձեր ընտանեկան կարգավիճակը՝ </p>
-                        <div class="form-check">
-                            <input v-model="maritalStatus" class="form-check-input" type="radio" name="maritalstatus" id="single" value=1>
-                            <label class="form-check-label" for="single"> Ամուրի </label>
-                        </div>
-                        <div class="form-check">
-                            <input v-model="maritalStatus" class="form-check-input" type="radio" name="maritalstatus" id="married" value=2>
-                            <label class="form-check-label" for="married"> Ամուսնացած </label>
-                        </div>
-                        <div class="form-check">
-                            <input v-model="maritalStatus" class="form-check-input" type="radio"
-                            name="maritalstatus" id="married-with-kids" value=3>
-                            <label class="form-check-label" for="married-with-kids"> Ամուսնացած եմ և ունեմ երեխաներ </label>
-                        </div>
-                        <div class="form-check">
-                            <input v-model="maritalStatus" class="form-check-input" type="radio"
-                            name="maritalstatus" id="single-parent" value=4>
-                            <label class="form-check-label" for="single-parent"> Միայնակ ծնող </label>
-                        </div>
-                        <div class="form-check">
-                            <input v-model="maritalStatus" class="form-check-input" type="radio"
-                            name="maritalstatus" id="widowed" value=5>
-                            <label class="form-check-label" for="widowed"> Այրի </label>
-                        </div>
-                        <div class="form-check">
-                            <input v-model="maritalStatus" class="form-check-input" type="radio"
-                            name="maritalstatus" id="other" value=6>
-                            <label class="form-check-label" for="other"> Այլ </label>
-                        </div>
-                    </div>
-
-                    <div class="container">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                                <label for="specialty">Խնդրում ենք նշել Ձեր մասնագիտությունը՝</label>
-                                <select v-model="specialty" class="form-control" id="specialty" >
-                                    <option value=1> Ուռուցքաբան </option>
-                                    <option value=2> Արյունաբան  </option>
-                                    <option value=3> Օրդինատոր (խնդրում ենք նշել ուսուցման տարին) </option>
-                                </select>
+                            <div class="form-group row">
+                                <div class="col-xs-2">
+                                    <label for="regions"> {{ sections[steps].region }} </label>
+                                    <select v-model="answers.region" class="form-control" id="regions">
+                                        <option value=1> Երևան </option>
+                                        <option value=2> Արագածոտն </option>
+                                        <option value=3> Արարատ  </option>
+                                        <option value=4> Արմավիր </option>
+                                        <option value=5> Գեղարքունիք </option>
+                                        <option value=6> Լոռի </option>
+                                        <option value=7> Կոտայք </option>
+                                        <option value=8> Շիրակ </option>
+                                        <option value=9> Սյունիք </option>
+                                        <option value=10> Վայոց ձոր </option>
+                                        <option value=11> Տավուշ </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="container">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                                <label for="regions"> Խնդրում ենք նշել՝ որ մարզում եք աշխատում: </label>
-                                <select v-model="region" class="form-control" id="regions">
-                                    <option value=1> Երևան </option>
-                                    <option value=2> Արագածոտն </option>
-                                    <option value=3> Արարատ  </option>
-                                    <option value=4> Արմավիր </option>
-                                    <option value=5> Գեղարքունիք </option>
-                                    <option value=6> Լոռի </option>
-                                    <option value=7> Կոտայք </option>
-                                    <option value=8> Շիրակ </option>
-                                    <option value=9> Սյունիք </option>
-                                    <option value=10> Վայոց ձոր </option>
-                                    <option value=11> Տավուշ </option>
-                                </select>
+                        <div v-if="answers.region != 1" class="container">
+                            <div class="form-group row">
+                                <div class="col-xs-2">
+                                    <label for="workArea"> {{ sections[steps].workArea }} </label>
+                                    <select v-model="answers.workArea" class="form-control" id="workArea">
+                                        <option value=1> Մայրաքաղաք </option>
+                                        <option value=2> Մարզկենտրոն  </option>
+                                        <option value=3> Մարզային քաղաք  </option>
+                                        <option value=4> Գյուղական համյանք/գյուղ </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div v-if="region != 1" class="container">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                                <label for="workArea"> Աշխատում եք քաղաքային թե՞ գյուղական համայնքում </label>
-                                <select v-model="workArea" class="form-control" id="workArea">
-                                    <option value=1> Մայրաքաղաք </option>
-                                    <option value=2> Մարզկենտրոն  </option>
-                                    <option value=3> Մարզային քաղաք  </option>
-                                    <option value=4> Գյուղական համյանք/գյուղ </option>
-                                </select>
+                        <div class="container">
+                                <div class="form-group row">
+                                    <div class="col-xs-2">
+                                        <label for="specialty"> {{ sections[steps].specialty }} </label>
+                                        <select v-model="answers.specialty" class="form-control" id="specialty" >
+                                            <option value=1> Ուռուցքաբան </option>
+                                            <option value=2> Արյունաբան  </option>
+                                            <option value=3> Օրդինատոր (խնդրում ենք նշել ուսուցման տարին) </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- If oncologist -->
+                            <div v-if="answers.specialty == 1" class="container" id="specialty-oncologist">
+                                <div class="form-group row">
+                                    <div class="col-xs-2">
+                                    <label for="specialty-oncologist"> {{ sections[steps].specialtyOncologist}} </label>
+                                    <select v-model="answers.oncologistNarrow" class="form-control" id="specialty-oncologist" >
+                                            <option value=1> Ուռուցքաբան-վիրաբույժ </option>
+                                            <option value=2> Ճառաքայթային ուռուցքաբան   </option>
+                                            <option value=3> Քիմիաթերապևտ </option>
+                                            <option value=4> Մանկական ուռուցքաբան  </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- If hematologist -->
+                            <div v-if="answers.specialty == 2" class="container" id="specialty-hematologist">
+                                <div class="form-group row">
+                                    <div class="col-xs-2">
+                                    <label for="specialty-hematologist"> {{ sections[steps].specialtyHematologist}} </label>
+                                    <select v-model="answers.narrowHematologist" class="form-control" id="specialty-hematologist">
+                                            <option value=1> Արյունաբան </option>
+                                            <option value=2> Մանկական արյունաբան </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="(answers.specialty == 1) | (answers.specialty ==2)" class="container">
+                                <div class="form-group row">
+                                    <div class="col-xs-2">
+                                        <label for="year-practice"> {{ sections[steps].yearPractice}} </label>
+                                        <input v-model="answers.yearPractice" type="number" class="form-control" id="year-practice">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- If resident -->
+                            <div v-if="answers.specialty == 3" class="container" id="resident">
+                                <div class="form-group row">
+                                    <div class="col-xs-2">
+                                    <label for="year-education"> {{ sections[steps].yearEducation}} </label>
+                                    <input v-model="answers.yearEducation" type="number" class="form-control" id="year-education">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container" id="hours-worked">
+                                <div class="form-group row">
+                                    <div class="col-xs-2">
+                                    <label for="hours-worked"> {{ sections[steps].hoursWorked}} </label>
+                                    <input v-model="answers.hoursWorked" type="number" class="form-control" id="hours-worked">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container" id="work-terminal">
+                                <div class="form-group row">
+                                    <div class="col-xs-2">
+                                    <label for="work-terminal"> {{ sections[steps].hoursWorkedTerminal}} </label>
+                                    <input v-model="answers.workTerminal" type="number" class="form-control" id="work-terminal">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container" id="night-shifts">
+                                <div class="form-group row">
+                                    <div class="col-xs-2">
+                                    <label for="night-shifts"> {{ sections[steps].hoursWorked}} </label>
+                                    <input v-model="answers.nightShift" type="number" class="form-control" id="night-shifts">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container" id="overtime">
+                                <div class="form-group row">
+                                    <div class="col-xs-2">
+                                    <label for="overtime"> {{ sections[steps].overTime}} </label>
+                                    <input v-model="answers.overtime" type="number" class="form-control" id="overtime">
+                                    </div>
+                                </div>
+                            </div>
+                </section>
+                <section id="leisure" v-if="steps==2">
+                        <div class="container" id="vacations">
+                            <div class="form-group row">
+                                <div class="col-xs-2">
+                                <label for="vacations"> {{ sections[steps].vacations}} </label>
+                                <input v-model="answers.vacation" type="number" class="form-control" id="vacations">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- If oncologist -->
-                    <div v-if="specialty == 1" class="container" id="specialty-oncologist">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="specialty-oncologist"> Խնդրում ենք նշել Ձեր նեղ մասնագիտացումը՝ </label>
-                            <select v-model="oncologistNarrow" class="form-control" id="specialty-oncologist" >
-                                    <option value=1> Ուռուցքաբան-վիրաբույժ </option>
-                                    <option value=2> Ճառաքայթային ուռուցքաբան   </option>
-                                    <option value=3> Քիմիաթերապևտ </option>
-                                    <option value=4> Մանկական ուռուցքաբան  </option>
-                                </select>
+                        <div class="container" id="exercise">
+                            <div class="form-group row">
+                                <div class="col-xs-2">
+                                <label for="exercise"> {{ sections[steps].exercise}} </label>
+                                <input v-model="answers.exercise" type="number" class="form-control" id="exercise">
+                                </div>
                             </div>
                         </div>
-                         <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="year-practice"> Քանի՞ տարի եք զբաղվում բժշկական պրակտիկայով: </label>
-                            <input v-model="yearPractice" type="number" class="form-control" id="year-practice">
+                </section>
+                <section id="prof-training" v-if="steps==3">
+                        <div class="container" id="cont-edu">
+                            <div class="form-group row">
+                                <div class="col-xs-2">
+                                <label for="cont-edu"> {{ sections[steps].contEducation}} </label>
+                                <input v-model="answers.contEducation" type="number" class="form-control" id="cont-edu">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- If hematologist -->
-                    <div v-if="specialty == 2" class="container" id="specialty-hematologist">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="specialty-hematologist"> Խնդրում ենք նշել Ձեր նեղ մասնագիտացումը՝ </label>
-                            <select v-model="narrowHematologist" class="form-control" id="specialty-hematologist">
-                                    <option value=1> Արյունաբան </option>
-                                    <option value=2> Մանկական արյունաբան </option>
-                                </select>
+                        <div class="container">
+                            <p> {{ sections[steps].comTraining}} <p>
+                            <div class="form-check">
+                                <input v-model="answers.comTraining" class="form-check-input" type="radio" name="com-training" id="com-training"
+                                value=1>
+                                <label class="form-check-label" for="yes"> Այո </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="answers.comTraining" class="form-check-input" type="radio" name="com-training" id="com-training" value=2>
+                                <label class="form-check-label" for="no"> Ոչ </label>
                             </div>
                         </div>
-                         <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="year-practice"> Քանի՞ տարի եք զբաղվում բժշկական պրակտիկայով: </label>
-                            <input v-model="yearPractice" type="number" class="form-control" id="year-practice">
+                        <!-- if com-training -->
+                        <div v-if="answers.comTraining == 1" class="container" id="cont-edu">
+                            <div class="form-group row">
+                                <div class="col-xs-2">
+                                <label for="com-train-hour"> {{ sections[steps].comTrainingHours}} </label>
+                                <input v-model="answers.comTrainingHours" type="number" class="form-control" id="com-train-hour">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- If resident -->
-                    <div v-if="specialty == 3" class="container" id="residents">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="year-education"> խնդրում ենք նշել ուսուցման տարին՝ </label>
-                            <input v-model="yearEducation" type="number" class="form-control" id="year-education">
+                </section>
+                <section id="services" v-if="steps==4">
+                        <div class="container">
+                            <label for="com-psy-service"> {{ sections[steps].psyServices}} </label>
+                            <div class="form-check">
+                                <input v-model="answers.psyServices" class="form-check-input" type="radio" name="psy-service" id="psy-service"
+                                value=1>
+                                <label class="form-check-label" for="yes"> Այո </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="answers.psyServices" class="form-check-input" type="radio" name="psy-service" id="psy-service" value=2>
+                                <label class="form-check-label" for="no"> Ոչ </label>
                             </div>
                         </div>
-                    </div>
-                    <div class="container" id="hours-worked">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="hours-worked"> Միջինում շաբաթական քանի՞ ժամ եք աշխատում: </label>
-                            <input v-model="hoursWorked" type="number" class="form-control" id="hours-worked">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container" id="night-shifts">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="night-shifts"> Միջինում քանի՞ գիշերային հերթապահություն եք ունենում ամսվա ընթացքում </label>
-                            <input v-model="nightShift" type="number" class="form-control" id="night-shifts">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container" id="overtime">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="overtime"> Միջինում շաբաթական քանի ժամ եք աշխատում Ձեր աշխատանքային ժամանակից դուրս՝ <br>
-                                առանց լրացուցիչ ֆինանսկան փոխհատուցման <br> (ներառյալ հեռախոսային կոնսուլտացիաները, չպլնավորված տնայցերը և այլն) </label>
-                            <input v-model="overtime" type="number" class="form-control" id="overtime">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container" id="vacations">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="vacations"> Քանի արձակուրդային օր եք ունենում տարվա ընթացքում </label>
-                            <input v-model="vacation" type="number" class="form-control" id="vacations">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container" id="exercise">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="exercise"> Միջինում շաբաթական քանի ժամ եք մարզվում </label>
-                            <input v-model="exercise" type="number" class="form-control" id="exercise">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container" id="work-terminal">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="work-terminal"> Միջինում շաբաթական քանի ժամ եք աշխատում կյանքի ավարտի 
-                                փուլում կամ դրան մոտ կանգնած պացիենտների հետ </label>
-                            <input v-model="workTerminal" type="number" class="form-control" id="work-terminal">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container" id="cont-edu">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="cont-edu"> Միջինում տարեկան քանի ժամ մասնագիտական վերապատրաստում եք անցնում </label>
-                            <input v-model="contEducation" type="number" class="form-control" id="cont-edu">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <p> Ձեր բուժհաստատությունում գործում է արդյոք հոգեսոցիալական ծառայություն: </p>
-                        <div class="form-check">
-                            <input v-model="psyServices" class="form-check-input" type="radio" name="psy-service" id="psy-service"
-                            value=1>
-                            <label class="form-check-label" for="yes"> Այո </label>
-                        </div>
-                        <div class="form-check">
-                            <input v-model="psyServices" class="form-check-input" type="radio" name="psy-service" id="psy-service" value=2>
-                            <label class="form-check-label" for="no"> Ոչ </label>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <p> Դուք երբև մասնակցել եք հաղորդկացման հմտությունների զարգացմանը ուղղված դասընթացների։ </p>
-                        <div class="form-check">
-                            <input v-model="comTraining" class="form-check-input" type="radio" name="com-training" id="com-training"
-                            value=1>
-                            <label class="form-check-label" for="yes"> Այո </label>
-                        </div>
-                        <div class="form-check">
-                            <input v-model="comTraining" class="form-check-input" type="radio" name="com-training" id="com-training" value=2>
-                            <label class="form-check-label" for="no"> Ոչ </label>
-                        </div>
-                    </div>
-                    <!-- if com-training -->
-                    <div v-if="comTraining == 1" class="container" id="cont-edu">
-                        <div class="form-group row">
-                            <div class="col-xs-2">
-                            <label for="com-train-hour"> նշել ժամաքանակը </label>
-                            <input v-model="comTrainingHours" type="number" class="form-control" id="com-train-hour">
-                            </div>
-                        </div>
-                    </div>
-                <!-- <div class="button">
-                    <button id="previous" class="btn btn-primary mb-2"  @click="prior"> Նախորդը </button>
-                    <button id="next" v-if="step < 19" class="btn btn-primary mb-2" @click="next"> Հաջորդը </button>
+                </section>    
+                    
+                <div class="button">
+                    <button id="previous" class="btn btn-primary mb-2" @click.prevent="prior"> Նախորդը </button>
+                    <button id="next" v-if="steps < 4" class="btn btn-primary mb-2" @click.prevent="next"> Հաջորդը </button>
                     <router-link v-else to="/maslach"> 
-                        <button id="next" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին: </button>
+                        <button id="next-questionnaire" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին: </button>
                     </router-link>  
-
-                </div> -->
-                <router-link to="/pil"> 
-                    <button id="next" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին: </button>
-                </router-link>
+                </div>
             </div>
-            
         </div>
-         
-        <!-- <div id="warning" v-if="showWarning" class="alert alert-danger" role="alert">
+        <div id="warning" v-if="showWarning" class="alert alert-danger" role="alert">
             <div id='warning-message' class="container">
-                <h5 style="padding: 3%">
+                <h5>
                 &emsp; &emsp; Ձեր յուրաքանչյուր պատասխան շատ կարևոր է մեզ համար և թույլ կտա կատարել լիարժեք վերլուծություն: <br> <br>
                 &emsp; &emsp; Հիշեցնում ենք, որ Ձեր տրված բոլոր պատասխանները անանուն են և վերլուծվելու են միմիայն ընդհանրացված տեսքով:<br> <br>
                 &emsp; &emsp; Վստա՞հ եք, որ ցանկանում եք բաց թողնել այս հարցը:
@@ -267,7 +263,8 @@
                 <a class="btn btn-primary btn-lg" role="button"  @click="showWarning=!showWarning" style="color: white;">
                 <span class="glyphicon glyphicon-chevron-right"></span> Ո՛չ </a>
             </div>
-        </div> -->
+        </div>
+        demographics {{ demographics }}
     </div>
 </template>
 
@@ -275,33 +272,113 @@
 export default {
     data() {
         return {
-            age:null,
-            sex: null,
-            maritalStatus: null,
-            specialty: null,
-            region: null,
-            workArea: null,
-            oncologistNarrow: null,
-            narrowHematologist: null,
-            yearPractice: null,
-            yearEducation: null,
-            hoursWorked: null,
-            nightShift: null,
-            overtime: null,
-            vacation: null,
-            exercise: null,
-            workTerminal: null,
-            contEducation: null,
-            psyServices: null,
-            comTraining: null,
-            comTrainingHours: null,
+            steps: 0,
+            showWarning: false,
+            answers:{
+                age:null,
+                sex: null,
+                maritalStatus: null,
+                specialty: 1,
+                region: 1,
+                workArea: 1,
+                oncologistNarrow: null,
+                narrowHematologist: null,
+                yearPractice: null,
+                yearEducation: null,
+                hoursWorked: null,
+                nightShift: null,
+                overtime: null,
+                vacation: null,
+                exercise: null,
+                workTerminal: null,
+                contEducation: null,
+                psyServices: null,
+                comTraining: null,
+                comTrainingHours: null,
+            },
+            sections:[
+                {
+                age:'Խնդրում ենք նշել Ձեր տարիքը՝',
+                sex: 'Խնդրում ենք նշել Ձեր սեռը՝',
+                maritalStatus: 'Խնդրում ենք նշել Ձեր ընտանեկան կարգավիճակը՝',
+                },
+                {
+                region:'Խնդրում ենք նշել՝ որ մարզում եք աշխատում:',
+                workArea: 'Աշխատում եք քաղաքային թե՞ գյուղական համայնքում',
+                specialty: 'Խնդրում ենք նշել Ձեր մասնագիտությունը՝',
+                specialtyOncologist: 'Խնդրում ենք նշել Ձեր նեղ մասնագիտացումը՝',
+                specialtyHematologist: 'Խնդրում ենք նշել Ձեր նեղ մասնագիտացումը՝',
+                yearPractice: 'Քանի՞ տարի եք զբաղվում բժշկական պրակտիկայով:',
+                yearEducation: 'խնդրում ենք նշել ուսուցման տարին՝',
+                hoursWorked: 'Միջինում շաբաթական քանի՞ ժամ եք աշխատում:',
+                hoursWorkedTerminal: 'Միջինում շաբաթական քանի ժամ եք աշխատում կյանքի ավարտի փուլում կամ դրան մոտ կանգնած պացիենտների հետ',
+                nightShift: 'Միջինում քանի՞ գիշերային հերթապահություն եք ունենում ամսվա ընթացքում',
+                overTime: 'Միջինում շաբաթական քանի ժամ եք աշխատում Ձեր աշխատանքային ժամանակից դուրս՝ առանց լրացուցիչ ֆինանսկան փոխհատուցման (ներառյալ հեռախոսային կոնսուլտացիաները, չպլնավորված տնայցերը և այլն)', 
+                },
+                {
+                vacations: 'Քանի արձակուրդային օր եք ունենում տարվա ընթացքում', 
+                exercise: 'Միջինում շաբաթական քանի ժամ եք մարզվում', 
+                },
+                {
+                contEducation: 'Միջինում տարեկան քանի ժամ մասնագիտական վերապատրաստում եք անցնում:',
+                comTraining: 'Դուք երբև մասնակցել եք հաղորդկացման հմտությունների զարգացմանը ուղղված դասընթացների։',
+                comTrainingHours: 'նշել ժամաքանակը'
+                },
+                {
+                psyServices:'Ձեր բուժհաստատությունում գործում է արդյոք հոգեսոցիալական ծառայություն:'
+                },
+            ],
+        }
+    },
+    methods: {
+        next() {
+            if ((this.steps != 1) && (this.steps != 3)) {
+                var a = Object.keys(this.sections[this.steps])
+                var m = false
+                for (let index = 0; index < a.length; index++) {
+                    if (!this.answers[a[index]]) {
+                        m = true;
+                    }
+                } 
+                if (m) {
+                    this.showWarning = true;
+                } else {
+                    this.steps ++;
+                }   
+            } else {
+                this.steps++;
+            }
+            
+        },
+        prior() {
+            if (this.steps > 0) {
+                this.steps--;
+            }
+        },
+        skipQuestion(){
+            this.steps++;
+            this.showWarning = false;
+        }  
+    },
+    computed: {
+        demographics: {
+            get(){
+                return this.$store.getters.demographics
+            },
+            set(){
+                this.$store.dispatch('updateDemographics', this.answers)
+            }
         }
     },
 }
 </script>
 
 <style scoped>
-
+.card{
+    margin-top:3rem;
+    margin-bottom:3rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
 .container{
     margin-left: 3%;
 }
@@ -310,8 +387,65 @@ export default {
     padding-left:2.5rem;
 }
 
+.container{
+    padding-left: 0.5rem;
+}
+
 #next{
-    margin-left: 73%;
+    margin-left: 75%;
+}
+
+#next-questionnaire{
+    margin-left: 62%;
+}
+
+h5{
+    padding: 3%;
+}
+
+p{
+    margin-left: -1rem;
+}
+
+label[for='overtime']{
+    width: 70%;
+}
+
+input[type=number]{
+  width: 50%;
+  margin-left: 1.5rem;
+}
+
+select{
+  width: 50%;
+  margin-left: 1.5rem;
+}
+
+input[type=radio]{
+    margin-left: -2rem;
+}
+
+section{
+    margin: 2rem;
+}
+
+button{
+    margin-left: 2rem;
+}
+
+.background{
+    opacity:    0.5; 
+    background: white; 
+    width:      100%;
+    height:     100%; 
+    position:   relative;
+}
+
+#warning{
+    background-color: lightpink;
+    color: black;
+    position: relative;
+    margin-top: -30%;
 }
 
 </style>
