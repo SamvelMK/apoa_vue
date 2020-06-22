@@ -20,14 +20,14 @@ export const store = new Vuex.Store({
                 hoursWorked: null,
                 nightShift: null,
                 overtime: null,
-                vacation: null,
+                vacations: null,
                 exercise: null,
                 workTerminal: null,
                 contEducation: null,
                 psyServices: null,
                 comTraining: null,
                 comTrainingHours: null,
-                },
+            },
             pil: [],
             maslach:[],
             eri:[],
@@ -35,7 +35,7 @@ export const store = new Vuex.Store({
     },
     getters: {
         demographics: state => {
-            state.data.demographics
+            return state.data.demographics
         },
         pil: state => {
             return state.data.pil

@@ -7,49 +7,49 @@
                             <div class="form-group row">
                                 <div class="col-xs-2">
                                 <label for="age"> {{ sections[steps].age }} </label>
-                                <input v-model="answers.age" type="number" class="form-control" id="age">
+                                <input v-model="demographics.age" type="number" class="form-control" id="age">
                                 </div>
                             </div>
                         </div>
                         <div class="container">
                             <p> {{ sections[steps].sex }} <p>
                             <div class="form-check">
-                                <input v-model="answers.sex" class="form-check-input" type="radio" name="sex" id="female"
+                                <input v-model="demographics.sex" class="form-check-input" type="radio" name="sex" id="female"
                                 value=1>
                                 <label class="form-check-label" for="female"> Իգ </label>
                             </div>
                             <div class="form-check">
-                                <input v-model="answers.sex" class="form-check-input" type="radio" name="sex" id="male" value=2>
+                                <input v-model="demographics.sex" class="form-check-input" type="radio" name="sex" id="male" value=2>
                                 <label class="form-check-label" for="male"> Ար </label>
                             </div>
                         </div>
                         <div class="container" >
                             <p> {{ sections[steps].maritalStatus }} <p>
                             <div class="form-check">
-                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio" name="maritalstatus" id="single" value=1>
+                                <input v-model="demographics.maritalStatus" class="form-check-input" type="radio" name="maritalstatus" id="single" value=1>
                                 <label class="form-check-label" for="single"> Ամուրի </label>
                             </div>
                             <div class="form-check">
-                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio" name="maritalstatus" id="married" value=2>
+                                <input v-model="demographics.maritalStatus" class="form-check-input" type="radio" name="maritalstatus" id="married" value=2>
                                 <label class="form-check-label" for="married"> Ամուսնացած </label>
                             </div>
                             <div class="form-check">
-                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio"
+                                <input v-model="demographics.maritalStatus" class="form-check-input" type="radio"
                                 name="maritalstatus" id="married-with-kids" value=3>
                                 <label class="form-check-label" for="married-with-kids"> Ամուսնացած եմ և ունեմ երեխաներ </label>
                             </div>
                             <div class="form-check">
-                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio"
+                                <input v-model="demographics.maritalStatus" class="form-check-input" type="radio"
                                 name="maritalstatus" id="single-parent" value=4>
                                 <label class="form-check-label" for="single-parent"> Միայնակ ծնող </label>
                             </div>
                             <div class="form-check">
-                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio"
+                                <input v-model="demographics.maritalStatus" class="form-check-input" type="radio"
                                 name="maritalstatus" id="widowed" value=5>
                                 <label class="form-check-label" for="widowed"> Այրի </label>
                             </div>
                             <div class="form-check">
-                                <input v-model="answers.maritalStatus" class="form-check-input" type="radio"
+                                <input v-model="demographics.maritalStatus" class="form-check-input" type="radio"
                                 name="maritalstatus" id="other" value=6>
                                 <label class="form-check-label" for="other"> Այլ </label>
                             </div>
@@ -61,7 +61,7 @@
                             <div class="form-group row">
                                 <div class="col-xs-2">
                                     <label for="regions"> {{ sections[steps].region }} </label>
-                                    <select v-model="answers.region" class="form-control" id="regions">
+                                    <select v-model="demographics.region" class="form-control" id="regions">
                                         <option value=1> Երևան </option>
                                         <option value=2> Արագածոտն </option>
                                         <option value=3> Արարատ  </option>
@@ -77,11 +77,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="answers.region != 1" class="container">
+                        <div v-if="demographics.region != 1" class="container">
                             <div class="form-group row">
                                 <div class="col-xs-2">
                                     <label for="workArea"> {{ sections[steps].workArea }} </label>
-                                    <select v-model="answers.workArea" class="form-control" id="workArea">
+                                    <select v-model="demographics.workArea" class="form-control" id="workArea">
                                         <option value=1> Մայրաքաղաք </option>
                                         <option value=2> Մարզկենտրոն  </option>
                                         <option value=3> Մարզային քաղաք  </option>
@@ -94,7 +94,7 @@
                                 <div class="form-group row">
                                     <div class="col-xs-2">
                                         <label for="specialty"> {{ sections[steps].specialty }} </label>
-                                        <select v-model="answers.specialty" class="form-control" id="specialty" >
+                                        <select v-model="demographics.specialty" class="form-control" id="specialty" >
                                             <option value=1> Ուռուցքաբան </option>
                                             <option value=2> Արյունաբան  </option>
                                             <option value=3> Օրդինատոր (խնդրում ենք նշել ուսուցման տարին) </option>
@@ -103,11 +103,11 @@
                                 </div>
                             </div>
                             <!-- If oncologist -->
-                            <div v-if="answers.specialty == 1" class="container" id="specialty-oncologist">
+                            <div v-if="demographics.specialty == 1" class="container" id="specialty-oncologist">
                                 <div class="form-group row">
                                     <div class="col-xs-2">
                                     <label for="specialty-oncologist"> {{ sections[steps].specialtyOncologist}} </label>
-                                    <select v-model="answers.oncologistNarrow" class="form-control" id="specialty-oncologist" >
+                                    <select v-model="demographics.oncologistNarrow" class="form-control" id="specialty-oncologist" >
                                             <option value=1> Ուռուցքաբան-վիրաբույժ </option>
                                             <option value=2> Ճառաքայթային ուռուցքաբան   </option>
                                             <option value=3> Քիմիաթերապևտ </option>
@@ -117,31 +117,31 @@
                                 </div>
                             </div>
                             <!-- If hematologist -->
-                            <div v-if="answers.specialty == 2" class="container" id="specialty-hematologist">
+                            <div v-if="demographics.specialty == 2" class="container" id="specialty-hematologist">
                                 <div class="form-group row">
                                     <div class="col-xs-2">
                                     <label for="specialty-hematologist"> {{ sections[steps].specialtyHematologist}} </label>
-                                    <select v-model="answers.narrowHematologist" class="form-control" id="specialty-hematologist">
+                                    <select v-model="demographics.narrowHematologist" class="form-control" id="specialty-hematologist">
                                             <option value=1> Արյունաբան </option>
                                             <option value=2> Մանկական արյունաբան </option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="(answers.specialty == 1) | (answers.specialty ==2)" class="container">
+                            <div v-if="(demographics.specialty == 1) | (demographics.specialty ==2)" class="container">
                                 <div class="form-group row">
                                     <div class="col-xs-2">
                                         <label for="year-practice"> {{ sections[steps].yearPractice}} </label>
-                                        <input v-model="answers.yearPractice" type="number" class="form-control" id="year-practice">
+                                        <input v-model="demographics.yearPractice" type="number" class="form-control" id="year-practice">
                                     </div>
                                 </div>
                             </div>
                             <!-- If resident -->
-                            <div v-if="answers.specialty == 3" class="container" id="resident">
+                            <div v-if="demographics.specialty == 3" class="container" id="resident">
                                 <div class="form-group row">
                                     <div class="col-xs-2">
                                     <label for="year-education"> {{ sections[steps].yearEducation}} </label>
-                                    <input v-model="answers.yearEducation" type="number" class="form-control" id="year-education">
+                                    <input v-model="demographics.yearEducation" type="number" class="form-control" id="year-education">
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
                                 <div class="form-group row">
                                     <div class="col-xs-2">
                                     <label for="hours-worked"> {{ sections[steps].hoursWorked}} </label>
-                                    <input v-model="answers.hoursWorked" type="number" class="form-control" id="hours-worked">
+                                    <input v-model="demographics.hoursWorked" type="number" class="form-control" id="hours-worked">
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@
                                 <div class="form-group row">
                                     <div class="col-xs-2">
                                     <label for="work-terminal"> {{ sections[steps].hoursWorkedTerminal}} </label>
-                                    <input v-model="answers.workTerminal" type="number" class="form-control" id="work-terminal">
+                                    <input v-model="demographics.workTerminal" type="number" class="form-control" id="work-terminal">
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@
                                 <div class="form-group row">
                                     <div class="col-xs-2">
                                     <label for="night-shifts"> {{ sections[steps].hoursWorked}} </label>
-                                    <input v-model="answers.nightShift" type="number" class="form-control" id="night-shifts">
+                                    <input v-model="demographics.nightShift" type="number" class="form-control" id="night-shifts">
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +173,7 @@
                                 <div class="form-group row">
                                     <div class="col-xs-2">
                                     <label for="overtime"> {{ sections[steps].overTime}} </label>
-                                    <input v-model="answers.overtime" type="number" class="form-control" id="overtime">
+                                    <input v-model="demographics.overtime" type="number" class="form-control" id="overtime">
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +183,7 @@
                             <div class="form-group row">
                                 <div class="col-xs-2">
                                 <label for="vacations"> {{ sections[steps].vacations}} </label>
-                                <input v-model="answers.vacation" type="number" class="form-control" id="vacations">
+                                <input v-model="demographics.vacations" type="number" class="form-control" id="vacations">
                                 </div>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                             <div class="form-group row">
                                 <div class="col-xs-2">
                                 <label for="exercise"> {{ sections[steps].exercise}} </label>
-                                <input v-model="answers.exercise" type="number" class="form-control" id="exercise">
+                                <input v-model="demographics.exercise" type="number" class="form-control" id="exercise">
                                 </div>
                             </div>
                         </div>
@@ -201,28 +201,28 @@
                             <div class="form-group row">
                                 <div class="col-xs-2">
                                 <label for="cont-edu"> {{ sections[steps].contEducation}} </label>
-                                <input v-model="answers.contEducation" type="number" class="form-control" id="cont-edu">
+                                <input v-model="demographics.contEducation" type="number" class="form-control" id="cont-edu">
                                 </div>
                             </div>
                         </div>
                         <div class="container">
                             <p> {{ sections[steps].comTraining}} <p>
                             <div class="form-check">
-                                <input v-model="answers.comTraining" class="form-check-input" type="radio" name="com-training" id="com-training"
+                                <input v-model="demographics.comTraining" class="form-check-input" type="radio" name="com-training" id="com-training"
                                 value=1>
                                 <label class="form-check-label" for="yes"> Այո </label>
                             </div>
                             <div class="form-check">
-                                <input v-model="answers.comTraining" class="form-check-input" type="radio" name="com-training" id="com-training" value=2>
+                                <input v-model="demographics.comTraining" class="form-check-input" type="radio" name="com-training" id="com-training" value=2>
                                 <label class="form-check-label" for="no"> Ոչ </label>
                             </div>
                         </div>
                         <!-- if com-training -->
-                        <div v-if="answers.comTraining == 1" class="container" id="cont-edu">
+                        <div v-if="demographics.comTraining == 1" class="container" id="cont-edu">
                             <div class="form-group row">
                                 <div class="col-xs-2">
                                 <label for="com-train-hour"> {{ sections[steps].comTrainingHours}} </label>
-                                <input v-model="answers.comTrainingHours" type="number" class="form-control" id="com-train-hour">
+                                <input v-model="demographics.comTrainingHours" type="number" class="form-control" id="com-train-hour">
                                 </div>
                             </div>
                         </div>
@@ -231,12 +231,12 @@
                         <div class="container">
                             <label for="com-psy-service"> {{ sections[steps].psyServices}} </label>
                             <div class="form-check">
-                                <input v-model="answers.psyServices" class="form-check-input" type="radio" name="psy-service" id="psy-service"
+                                <input v-model="demographics.psyServices" class="form-check-input" type="radio" name="psy-service" id="psy-service"
                                 value=1>
                                 <label class="form-check-label" for="yes"> Այո </label>
                             </div>
                             <div class="form-check">
-                                <input v-model="answers.psyServices" class="form-check-input" type="radio" name="psy-service" id="psy-service" value=2>
+                                <input v-model="demographics.psyServices" class="form-check-input" type="radio" name="psy-service" id="psy-service" value=2>
                                 <label class="form-check-label" for="no"> Ոչ </label>
                             </div>
                         </div>
@@ -264,7 +264,6 @@
                 <span class="glyphicon glyphicon-chevron-right"></span> Ո՛չ </a>
             </div>
         </div>
-        demographics {{ demographics }}
     </div>
 </template>
 
@@ -274,28 +273,6 @@ export default {
         return {
             steps: 0,
             showWarning: false,
-            answers:{
-                age:null,
-                sex: null,
-                maritalStatus: null,
-                specialty: 1,
-                region: 1,
-                workArea: 1,
-                oncologistNarrow: null,
-                narrowHematologist: null,
-                yearPractice: null,
-                yearEducation: null,
-                hoursWorked: null,
-                nightShift: null,
-                overtime: null,
-                vacation: null,
-                exercise: null,
-                workTerminal: null,
-                contEducation: null,
-                psyServices: null,
-                comTraining: null,
-                comTrainingHours: null,
-            },
             sections:[
                 {
                 age:'Խնդրում ենք նշել Ձեր տարիքը՝',
@@ -336,7 +313,7 @@ export default {
                 var a = Object.keys(this.sections[this.steps])
                 var m = false
                 for (let index = 0; index < a.length; index++) {
-                    if (!this.answers[a[index]]) {
+                    if (!this.demographics[a[index]]) {
                         m = true;
                     }
                 } 
@@ -365,9 +342,9 @@ export default {
             get(){
                 return this.$store.getters.demographics
             },
-            set(){
-                this.$store.dispatch('updateDemographics', this.answers)
-            }
+            // set(){
+            //     this.$store.dispatch('updateDemographics', this.answers)
+            // }
         }
     },
 }

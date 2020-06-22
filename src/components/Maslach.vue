@@ -94,7 +94,6 @@
                 <span class="glyphicon glyphicon-chevron-right"></span> Ո՛չ </a>
             </div>
         </div>
-        {{ maslach }}
     </div>
 </template>
 
