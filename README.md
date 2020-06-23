@@ -20,6 +20,11 @@ npm run build
 npm run lint
 ```
 
+### Deploy on firebase
+
+firebase deploy
+
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See [Configuration Reference Vue](https://cli.vuejs.org/config/).
+See [Configuration Reference Firebase](https://firebase.google.com/docs/cli).
 "# apoa_vue" 
