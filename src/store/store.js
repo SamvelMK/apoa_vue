@@ -6,19 +6,23 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         data: {
+            date: Date.now(), // miliseconds
+            consentTime: null,
             demographics:{
+                startTime: null,
+                endTime: null,
                 age:null,
                 sex: null,
                 maritalStatus: null,
-                specialty: 1,
-                region: 1,
-                workArea: 1,
+                specialty: 0,
+                region: 0,
+                workArea: 0,
                 oncologistNarrow: null,
                 narrowHematologist: null,
                 yearPractice: null,
                 yearEducation: null,
                 hoursWorked: null,
-                nightShift: null,
+                hoursNightShift: null,
                 overtime: null,
                 vacations: null,
                 exercise: null,
@@ -27,6 +31,10 @@ export const store = new Vuex.Store({
                 psyServices: null,
                 comTraining: null,
                 comTrainingHours: null,
+                covidWorkChange: null,
+                covidWorkChangeMore: null,
+                covidStress: null,
+                covidStressMore: null,
             },
             pil: [],
             maslach:[],
@@ -60,6 +68,18 @@ export const store = new Vuex.Store({
         updateDemographics: (state, payload)=>{
             state.data.demographics.push(payload);
         },
+        updateStartTime: (state, payload)=>{
+            state.data.demographics.startTime = payload;
+        },
+        updateEndTime: (state, payload)=>{
+            state.data.demographics.endTime = payload;
+        },
+        updateStartTimeMaslach: (state, payload)=>{
+            state.data.maslach.push({startTimeMaslach: payload});
+        },
+        updateEndTimeMaslach: (state, payload)=>{
+            state.data.maslach.push({endTimeMaslach: payload});
+        },
     },
     actions: {
         updatePil({commit}, payload){
@@ -73,6 +93,18 @@ export const store = new Vuex.Store({
         },
         updateDemographics({commit}, payload){
             commit('updateDemographics', payload);
+        },
+        updateStartTime({commit}, payload){
+            commit('updateStartTime', payload);
+        },
+        updateEndTime({commit}, payload){
+            commit('updateEndTime', payload);
+        },
+        updateStartTimeMaslach({commit}, payload){
+            commit('updateStartTimeMaslach', payload);
+        },
+        updateEndTimeMaslach({commit}, payload){
+            commit('updateEndTimeMaslach', payload);
         },
     }
 })

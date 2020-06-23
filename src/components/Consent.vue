@@ -24,7 +24,7 @@
                 <button id="no" class="btn btn-primary mb-2"> 
                     <router-link to="/refuse"> <a>Ոչ</a></router-link>
                 </button> 
-                <button id="yes" class="btn btn-primary mb-2">
+                <button id="yes" class="btn btn-primary mb-2" @click="seTimeOut()">
                     <router-link to="/demographics"> <a> Այո </a></router-link>
                 </button> 
                 
@@ -34,6 +34,16 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    methods: {
+        seTimeOut(){
+            this.$store.state.data.consentTime = Date.now()
+        }
+    },
+}
+</script>
 
 <style scoped>
 p{
@@ -46,11 +56,17 @@ h1{
 }
 
 #no{
-    margin-right: 90%;
+    margin-right: 80%;
 }
 
 a{
     color: white;
+}
+
+button{
+    padding-left: 2rem;
+    padding-right: 2rem;
+
 }
 
 </style>

@@ -1,12 +1,12 @@
 <template>
     <div>
         <div v-if="startTest" class="card" id="start-test" >
-                <h1 type="subtitle"> Հարցարան 3 </h1>
+                <h1 type="subtitle"> Հարցարան 3 (վերջին հարցարան) </h1>
                 <p> {{instructions}} </p>
-                 <div class="button">
-                        <button id="startTest" class="btn btn-primary mb-2"  @click="startTest = !startTest"> Սկսել հարցարանը: </button>
-                 </div>
-            </div>
+                <div class="button">
+                    <button id="startTest" class="btn btn-primary mb-2"  @click="startTest = !startTest; seTimeIn()"> Սկսել հարցարանը </button>
+                </div>
+        </div>
         <div v-else class="container" :class="{background:showWarning}">
             <div class="container">
                 <h4>{{ instructions }}</h4>
@@ -56,9 +56,8 @@
                         <button id="previous" class="btn btn-primary mb-2"  @click="prior"> Նախորդը </button>
                         <button id="next" v-if="step < 15" class="btn btn-primary mb-2" @click="next"> Հաջորդը </button>
                         <router-link v-else to="/results"> 
-                            <button id="next-questionaire" class="btn btn-primary mb-2" @click="submitData"> Տեսնել արդյունքները: </button>
+                            <button id="results" class="btn btn-primary mb-2" @click="submitData"> Տեսնել արդյունքները </button>
                         </router-link>  
-
                     </div>
             </div>
         </div>
@@ -80,6 +79,8 @@
 
 
 <script>
+    import { dbPath } from "../../dbConfig";
+    console.log(dbPath);
 
 export default {
     data() {
@@ -91,7 +92,7 @@ export default {
                     'Աշխատանքային ծանրաբեռնվածության պատճառով ես անընդհատ ժամանակի սղություն ունեմ։',
                     'Աշխատանքս կատարելիս շատ են պատահում ընդհատումներ և խանգարումներ։',
                     'Վերջին մի քանի տարվա ընթացքում աշխատանքս դարձել է ավելի ու ավելի խստապահանջ։',
-                    'Իմ վերադասից կամ այլ համարժեք անձից ես ստանում եմ այնն հարգանքը որին արժանի եմ',
+                    'Իմ վերադասից կամ այլ համարժեք անձից ես ստանում եմ այն հարգանքը որին արժանի եմ',
                     'Իմ աշխատանքային առաջընթացի հեռանկարները քիչ են։',
                     'Իմ աշխատանքային իրավիճակում տեղի ունեցել է կամ սպասվում է անցանկալի փոփոխություն։',
                     'Իմ աշխատանքային անվտանգությունը խղճուկ է։',
@@ -127,8 +128,14 @@ export default {
             this.step++;
             this.showWarning = false;
         },
+        seTimeIn(){
+            this.startTime = Date.now()
+        }, 
         submitData(){
-            this.$http.post('https://test-apoa.firebaseio.com/data.json', this.$store.state.data)
+            this.endTime = Date.now()
+            this.$store.state.data.eri.push({startTime: this.startTime})
+            this.$store.state.data.eri.push({endTime: this.endTime})
+            this.$http.post(dbPath, this.$store.state.data)
         }
     },
     computed: {
@@ -201,8 +208,8 @@ input{
     margin-left: 15%;
 }
 
-#next-questionnaire{
-    margin-left: 62%;
+#results{
+    margin-left: 5%;
 }
 
 #startTest{

@@ -1,6 +1,14 @@
 <template>
     <div>
-        <div class="container" id="background" >
+        <div v-if="startTest" class="card" id="start-test" >
+                <h1 type="subtitle"> Սոցիալ դեմոգրաֆիկ տվյալներ </h1>
+                <h5> &emsp; &emsp; Ձեզ կառաջարկվեն Ձեր և ձեր աշխատանքի վերաբերյալ հարցեր: Ցանկանում ենք հիշեցնել, որ Ձեր տրված բոլոր պատասխանները անանուն են և վերլուծվելու են միմիայն ընդհանրացված տեսքով:<br> <br>
+                </h5>
+                <div class="button">
+                    <button id="startTest" class="btn btn-primary mb-2"  @click="startTest = !startTest; seTimeIn()"> Սկսել հարցարանը </button>
+                </div>
+        </div>
+        <div v-else class="container" id="background" >
             <div class="card" :class="{background:showWarning}">
                 <section v-if="steps==0">
                     <div class="container">
@@ -62,6 +70,7 @@
                                 <div class="col-xs-2">
                                     <label for="regions"> {{ sections[steps].region }} </label>
                                     <select v-model="demographics.region" class="form-control" id="regions">
+                                        <option value=0 selected disabled hidden> Ընտրեք մարզը </option>
                                         <option value=1> Երևան </option>
                                         <option value=2> Արագածոտն </option>
                                         <option value=3> Արարատ  </option>
@@ -82,6 +91,7 @@
                                 <div class="col-xs-2">
                                     <label for="workArea"> {{ sections[steps].workArea }} </label>
                                     <select v-model="demographics.workArea" class="form-control" id="workArea">
+                                        <option value=0 selected disabled hidden> Ընտրեք համայնքը </option>
                                         <option value=1> Մայրաքաղաք </option>
                                         <option value=2> Մարզկենտրոն  </option>
                                         <option value=3> Մարզային քաղաք  </option>
@@ -95,6 +105,7 @@
                                     <div class="col-xs-2">
                                         <label for="specialty"> {{ sections[steps].specialty }} </label>
                                         <select v-model="demographics.specialty" class="form-control" id="specialty" >
+                                            <option value=0 selected disabled hidden> Ընտրեք մասնագիտությունը </option>
                                             <option value=1> Ուռուցքաբան </option>
                                             <option value=2> Արյունաբան  </option>
                                             <option value=3> Օրդինատոր (խնդրում ենք նշել ուսուցման տարին) </option>
@@ -109,9 +120,9 @@
                                     <label for="specialty-oncologist"> {{ sections[steps].specialtyOncologist}} </label>
                                     <select v-model="demographics.oncologistNarrow" class="form-control" id="specialty-oncologist" >
                                             <option value=1> Ուռուցքաբան-վիրաբույժ </option>
-                                            <option value=2> Ճառաքայթային ուռուցքաբան   </option>
+                                            <option value=2> Ճառաքայթային ուռուցքաբան </option>
                                             <option value=3> Քիմիաթերապևտ </option>
-                                            <option value=4> Մանկական ուռուցքաբան  </option>
+                                            <option value=4> Մանկական ուռուցքաբան </option>
                                         </select>
                                     </div>
                                 </div>
@@ -164,8 +175,8 @@
                             <div class="container" id="night-shifts">
                                 <div class="form-group row">
                                     <div class="col-xs-2">
-                                    <label for="night-shifts"> {{ sections[steps].hoursWorked}} </label>
-                                    <input v-model="demographics.nightShift" type="number" class="form-control" id="night-shifts">
+                                    <label for="night-shifts"> {{ sections[steps].hoursNightShift}} </label>
+                                    <input v-model="demographics.hoursNightShift" type="number" class="form-control" id="night-shifts">
                                     </div>
                                 </div>
                             </div>
@@ -227,26 +238,88 @@
                             </div>
                         </div>
                 </section>
-                <section id="services" v-if="steps==4">
-                        <div class="container">
-                            <label for="com-psy-service"> {{ sections[steps].psyServices}} </label>
+                <section id="psy-services" v-if="steps==4">
+                    <div class="container">
+                            <p> {{ sections[steps].psyServices}} <p>
                             <div class="form-check">
-                                <input v-model="demographics.psyServices" class="form-check-input" type="radio" name="psy-service" id="psy-service"
+                                <input v-model="demographics.psyServices" class="form-check-input" type="radio" name="psy-services" id="psy-services"
                                 value=1>
                                 <label class="form-check-label" for="yes"> Այո </label>
                             </div>
                             <div class="form-check">
-                                <input v-model="demographics.psyServices" class="form-check-input" type="radio" name="psy-service" id="psy-service" value=2>
+                                <input v-model="demographics.psyServices" class="form-check-input" type="radio" name="psy-services" id="psy-services" value=2>
                                 <label class="form-check-label" for="no"> Ոչ </label>
                             </div>
                         </div>
+                </section>
+                <section id="covid" v-if="steps==5">
+                        <div class="container">
+                            <p> {{ sections[steps].covidWorkChange}} <p>
+                            <div class="form-check">
+                                <input v-model="demographics.covidWorkChange" class="form-check-input" type="radio" name="covidWorkChange" id="Not-at-all" value=1>
+                                <label class="form-check-label" for="Not-at-all"> Առհասարակ չեն փոփոխվել </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="demographics.covidWorkChange" class="form-check-input" type="radio" name="covidWorkChange" id="little" value=2>
+                                <label class="form-check-label" for="A little"> Մի փոքր փոփոխվել են </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="demographics.covidWorkChange" class="form-check-input" type="radio"
+                                name="covidWorkChange" id="quite-bit" value=3>
+                                <label class="form-check-label" for="quite-bit"> Որոշ չափով փոփոխվել են </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="demographics.covidWorkChange" class="form-check-input" type="radio"
+                                name="covidWorkChange" id="alot" value=4>
+                                <label class="form-check-label" for="alot"> Նշանակալի չափով են փոփոխվել </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="demographics.covidWorkChange" class="form-check-input" type="radio"
+                                name="covidWorkChange" id="great-deal" value=5>
+                                <label class="form-check-label" for="great-deal"> Ծայրահեղ շատ են փոփոխվել: </label>
+                            </div>
+                            <div v-if="demographics.covidWorkChange > 1 " class="form-group">
+                                <label for="other"> Խնդրում ենք, մանրամասնել </label>
+                            <textarea v-model="demographics.covidWorkChangeMore" class="form-control" id="other" rows="3"></textarea>
+                        </div>
+                        </div>                        
+                        <div class="container">
+                            <p> {{ sections[steps].covidWorkChange}} <p>
+                            <div class="form-check">
+                                <input v-model="demographics.covidStress" class="form-check-input" type="radio" name="covidStress" id="Not-at-all" value=1>
+                                <label class="form-check-label" for="Not-at-all"> Առհասարակ չի ազդել </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="demographics.covidStress" class="form-check-input" type="radio" name="covidStress" id="little" value=2>
+                                <label class="form-check-label" for="A little"> Մի փոքր է ազդել </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="demographics.covidStress" class="form-check-input" type="radio"
+                                name="covidStress" id="quite-bit" value=3>
+                                <label class="form-check-label" for="quite-bit"> Որոշ չափով է ազդել </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="demographics.covidStress" class="form-check-input" type="radio"
+                                name="covidStress" id="alot" value=4>
+                                <label class="form-check-label" for="alot"> Նշանակալի ձևով է ազդել </label>
+                            </div>
+                            <div class="form-check">
+                                <input v-model="demographics.covidStress" class="form-check-input" type="radio"
+                                name="covidStress" id="great-deal" value=5>
+                                <label class="form-check-label" for="great-deal"> Ծայրահեղ ուժգին է ազդել </label>
+                            </div>
+                            <div v-if="demographics.covidStress > 1 " class="form-group">
+                                <label for="other"> Խնդրում ենք, մանրամասնել </label>
+                            <textarea v-model="demographics.covidStressMore" class="form-control" id="other" rows="3"></textarea>
+                        </div>
+                        </div>                        
                 </section>    
                     
                 <div class="button">
                     <button id="previous" class="btn btn-primary mb-2" @click.prevent="prior"> Նախորդը </button>
-                    <button id="next" v-if="steps < 4" class="btn btn-primary mb-2" @click.prevent="next"> Հաջորդը </button>
-                    <router-link v-else to="/maslach"> 
-                        <button id="next-questionnaire" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին: </button>
+                    <button id="next" v-if="steps < 5" class="btn btn-primary mb-2" @click.prevent="next"> Հաջորդը </button>
+                    <router-link v-else to="/maslach" v-model="demographics"> 
+                        <button id="next-questionnaire" @click="seTimeOut()" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին </button>
                     </router-link>  
                 </div>
             </div>
@@ -263,7 +336,7 @@
                 <a class="btn btn-primary btn-lg" role="button"  @click="showWarning=!showWarning" style="color: white;">
                 <span class="glyphicon glyphicon-chevron-right"></span> Ո՛չ </a>
             </div>
-        </div>
+        </div>    
     </div>
 </template>
 
@@ -271,6 +344,9 @@
 export default {
     data() {
         return {
+            startTest: true,
+            startTime: null,
+            endTime: null,
             steps: 0,
             showWarning: false,
             sections:[
@@ -288,12 +364,12 @@ export default {
                 yearPractice: 'Քանի՞ տարի եք զբաղվում բժշկական պրակտիկայով:',
                 yearEducation: 'խնդրում ենք նշել ուսուցման տարին՝',
                 hoursWorked: 'Միջինում շաբաթական քանի՞ ժամ եք աշխատում:',
-                hoursWorkedTerminal: 'Միջինում շաբաթական քանի ժամ եք աշխատում կյանքի ավարտի փուլում կամ դրան մոտ կանգնած պացիենտների հետ',
-                nightShift: 'Միջինում քանի՞ գիշերային հերթապահություն եք ունենում ամսվա ընթացքում',
+                hoursWorkedTerminal: 'Միջինում շաբաթական քանի ժամ եք աշխատում կյանքի ավարտի փուլում կամ դրան մոտ կանգնած պացիենտների հետ:',
+                hoursNightShift: 'Միջինում քանի՞ գիշերային հերթապահություն եք ունենում ամսվա ընթացքում',
                 overTime: 'Միջինում շաբաթական քանի ժամ եք աշխատում Ձեր աշխատանքային ժամանակից դուրս՝ առանց լրացուցիչ ֆինանսկան փոխհատուցման (ներառյալ հեռախոսային կոնսուլտացիաները, չպլնավորված տնայցերը և այլն)', 
                 },
                 {
-                vacations: 'Քանի արձակուրդային օր եք ունենում տարվա ընթացքում', 
+                vacations: 'Միջինում քանի արձակուրդային օր եք ունենում տարվա ընթացքում:', 
                 exercise: 'Միջինում շաբաթական քանի ժամ եք մարզվում', 
                 },
                 {
@@ -304,6 +380,10 @@ export default {
                 {
                 psyServices:'Ձեր բուժհաստատությունում գործում է արդյոք հոգեսոցիալական ծառայություն:'
                 },
+                {
+                covidWorkChange: 'Արդյոք Ձեր աշխատանքային պարտականությունները փոփոխվել են COVID19 համաճարակի ազդեցությամբ:',
+                covidStress: 'Ինչպես եք կարծում, որքանով է COVID19-ը համաճարակը ազդել Ձեր կողմից ապրվող սթրեսի մակարդակի վրա:'  
+                }
             ],
         }
     },
@@ -335,17 +415,20 @@ export default {
         skipQuestion(){
             this.steps++;
             this.showWarning = false;
-        }  
+        },
+        seTimeIn(){
+           this.$store.dispatch('updateStartTime', Date.now()) 
+        }, 
+        seTimeOut(){
+            this.$store.dispatch('updateEndTime', Date.now()) 
+        } 
     },
     computed: {
         demographics: {
             get(){
                 return this.$store.getters.demographics
             },
-            // set(){
-            //     this.$store.dispatch('updateDemographics', this.answers)
-            // }
-        }
+        },
     },
 }
 </script>
@@ -376,7 +459,11 @@ export default {
     margin-left: 62%;
 }
 
-h5{
+h1{
+    text-align:center;
+}
+
+h5, h1{
     padding: 3%;
 }
 
@@ -423,6 +510,10 @@ button{
     color: black;
     position: relative;
     margin-top: -30%;
+}
+
+#startTest{
+    margin-left: 80%;
 }
 
 </style>

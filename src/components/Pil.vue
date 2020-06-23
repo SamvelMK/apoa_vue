@@ -4,7 +4,7 @@
                 <h1 type="subtitle"> Հարցարան 2 </h1>
                 <p> {{instructions}} </p>
                  <div class="button">
-                        <button id="startTest" class="btn btn-primary mb-2"  @click="startTest = !startTest"> Սկսել հարցարանը: </button>
+                        <button id="startTest" class="btn btn-primary mb-2"  @click="startTest = !startTest; seTimeIn()" > Սկսել հարցարանը </button>
                  </div>
             </div>
         <div v-else class="container" :class="{background:showWarning}">
@@ -61,7 +61,7 @@
                         <button id="previous" class="btn btn-primary mb-2"  @click="prior"> Նախորդը </button>
                         <button id="next" v-if="step < 19" class="btn btn-primary mb-2" @click="next"> Հաջորդը </button>
                         <router-link v-else to="/eri"> 
-                            <button id="next-questionaire" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին: </button>
+                            <button @click="seTimeOut" id="next-questionaire" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին </button>
                         </router-link>  
 
                     </div>
@@ -155,6 +155,14 @@ export default {
         skipQuestion(){
             this.step++;
             this.showWarning = false;
+        },
+        seTimeIn(){
+            this.startTime = Date.now()
+        }, 
+        seTimeOut(){
+            this.endTime = Date.now()
+            this.$store.state.data.pil.push({startTime: this.startTime})
+            this.$store.state.data.pil.push({endTime: this.endTime})
         },
     },
     computed: {

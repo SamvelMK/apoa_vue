@@ -4,7 +4,7 @@
                 <h1 type="subtitle"> Հարցարան 1 </h1>
                 <p> {{instructions}} </p>
                  <div class="button">
-                        <button id="startTest" class="btn btn-primary mb-2"  @click="startTest = !startTest"> Սկսել հարցարանը: </button>
+                        <button id="startTest" class="btn btn-primary mb-2"  @click="startTest = !startTest; seTimeIn()"> Սկսել հարցարանը </button>
                  </div>
             </div>
         <div v-else class="container" :class="{background:showWarning}">
@@ -75,9 +75,8 @@
                         <button id="previous" class="btn btn-primary mb-2"  @click="prior"> Նախորդը </button>
                         <button id="next" v-if="step < 19" class="btn btn-primary mb-2" @click="next"> Հաջորդը </button>
                         <router-link v-else to="/pil"> 
-                            <button id="next-questionaire" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին: </button>
-                        </router-link>  
-
+                            <button id="next-questionaire" @click="seTimeOut" class="btn btn-primary mb-2"> Անցնել հաջորդ հարցարանին </button>
+                        </router-link>
                     </div>
             </div>
         </div>
@@ -103,6 +102,8 @@
 export default {
     data() {
         return {
+            startTime: null,
+            endTime: null,
             instructions: `Խնդրում ենք պատասխանել, թե որքան հաճախ եք ունենում հարցարանում նշված զգացումները։
                             Հարցերի շուրջ երկար մի՛ մտածեք, պատասխանեք առաջին տպավորությամբ առաջնորդվելով։`,
             
@@ -152,6 +153,17 @@ export default {
             this.step++;
             this.showWarning = false;
         },
+        seTimeIn(){
+            this.startTime = Date.now()
+        }, 
+        seTimeOut(){
+            this.endTime = Date.now()
+            this.$store.state.data.maslach.push({startTime: this.startTime})
+            this.$store.state.data.maslach.push({endTime: this.endTime})
+        },
+        submit(){
+            this.$http.post('https://test-apoa.firebaseio.com/data.json', this.$store.state.data)
+        }
     },
     computed: {
         maslach: {

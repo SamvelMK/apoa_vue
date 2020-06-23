@@ -2,6 +2,13 @@
 node_modules
 /dist
 
+# database config
+dbConfig.js
+database.rules.json
+
+# Firebase
+.firebaserc
+
 # local env files
 .env.local
 .env.*.local
