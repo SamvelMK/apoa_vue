@@ -28,4 +28,3 @@ firebase deploy
 ### Customize configuration
 See [Configuration Reference Vue](https://cli.vuejs.org/config/). <br> <br>
 See [Configuration Reference Firebase](https://firebase.google.com/docs/cli).
-"# apoa_vue" 
