@@ -161,9 +161,6 @@ export default {
             this.$store.state.data.maslach.push({startTime: this.startTime})
             this.$store.state.data.maslach.push({endTime: this.endTime})
         },
-        submit(){
-            this.$http.post('https://test-apoa.firebaseio.com/data.json', this.$store.state.data)
-        }
     },
     computed: {
         maslach: {

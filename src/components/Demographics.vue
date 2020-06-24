@@ -2,7 +2,7 @@
     <div>
         <div v-if="startTest" class="card" id="start-test" >
                 <h1 type="subtitle"> Սոցիալ դեմոգրաֆիկ տվյալներ </h1>
-                <h5> &emsp; &emsp; Ձեզ կառաջարկվեն Ձեր և ձեր աշխատանքի վերաբերյալ հարցեր: Ցանկանում ենք հիշեցնել, որ Ձեր տրված բոլոր պատասխանները անանուն են և վերլուծվելու են միմիայն ընդհանրացված տեսքով:<br> <br>
+                <h5> &emsp; &emsp; Ձեզ կառաջարկվեն Ձեր և Ձեր աշխատանքի վերաբերյալ հարցեր: Ցանկանում ենք հիշեցնել, որ Ձեր տրված բոլոր պատասխանները անանուն են և վերլուծվելու են միմիայն ընդհանրացված տեսքով:<br> <br>
                 </h5>
                 <div class="button">
                     <button id="startTest" class="btn btn-primary mb-2"  @click="startTest = !startTest; seTimeIn()"> Սկսել հարցարանը </button>
@@ -123,6 +123,8 @@
                                             <option value=2> Ճառաքայթային ուռուցքաբան </option>
                                             <option value=3> Քիմիաթերապևտ </option>
                                             <option value=4> Մանկական ուռուցքաբան </option>
+                                            <option value=5> Ուռուցքաբան. ծառայության ղեկավար (միայն կազմակերչկան պարտականություններ) </option>
+                                            <option value=6> Ուռուցքաբան. ծառայության ղեկավար (կազմակերպչական և կլինիկական աշխատանք) </option>
                                         </select>
                                     </div>
                                 </div>
@@ -135,6 +137,8 @@
                                     <select v-model="demographics.narrowHematologist" class="form-control" id="specialty-hematologist">
                                             <option value=1> Արյունաբան </option>
                                             <option value=2> Մանկական արյունաբան </option>
+                                            <option value=3> Արյունաբան. ծառայության ղեկավար (միայն կազմակերչկան պարտականություններ) </option>
+                                            <option value=4> Արյունաբան. ծառայության ղեկավար (կազմակերպչական և կլինիկական աշխատանք) </option>
                                         </select>
                                     </div>
                                 </div>
@@ -284,7 +288,7 @@
                         </div>
                         </div>                        
                         <div class="container">
-                            <p> {{ sections[steps].covidWorkChange}} <p>
+                            <p> {{ sections[steps].covidStress}} <p>
                             <div class="form-check">
                                 <input v-model="demographics.covidStress" class="form-check-input" type="radio" name="covidStress" id="Not-at-all" value=1>
                                 <label class="form-check-label" for="Not-at-all"> Առհասարակ չի ազդել </label>
@@ -366,7 +370,7 @@ export default {
                 hoursWorked: 'Միջինում շաբաթական քանի՞ ժամ եք աշխատում:',
                 hoursWorkedTerminal: 'Միջինում շաբաթական քանի ժամ եք աշխատում կյանքի ավարտի փուլում կամ դրան մոտ կանգնած պացիենտների հետ:',
                 hoursNightShift: 'Միջինում քանի՞ գիշերային հերթապահություն եք ունենում ամսվա ընթացքում',
-                overTime: 'Միջինում շաբաթական քանի ժամ եք աշխատում Ձեր աշխատանքային ժամանակից դուրս՝ առանց լրացուցիչ ֆինանսկան փոխհատուցման (ներառյալ հեռախոսային կոնսուլտացիաները, չպլնավորված տնայցերը և այլն)', 
+                overTime: 'Միջինում շաբաթական քանի ժամ եք աշխատում Ձեր աշխատանքային ժամանակից դուրս՝ առանց լրացուցիչ ֆինանսական փոխհատուցման (ներառյալ հեռախոսային կոնսուլտացիաները, չպլնավորված տնայցերը և այլն)', 
                 },
                 {
                 vacations: 'Միջինում քանի արձակուրդային օր եք ունենում տարվա ընթացքում:', 
